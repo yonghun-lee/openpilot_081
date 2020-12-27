@@ -203,6 +203,7 @@ struct CarState {
   radarDistance @41 :Float32;
   standStill @42 :Bool;
   limitSpeedmanual @43 :Bool;
+  vSetDis @44 :Float32;
 
   struct WheelSpeeds {
     # optional wheel speeds
