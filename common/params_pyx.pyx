@@ -133,6 +133,7 @@ keys = {
   b"OpkrVariableSteerDelta": [TxType.PERSISTENT],
   b"FingerprintTwoSet": [TxType.PERSISTENT],
   b"OpkrVariableCruiseProfile": [TxType.PERSISTENT],
+  b"OpkrLiveTune": [TxType.PERSISTENT],
 }
 
 def ensure_bytes(v):
