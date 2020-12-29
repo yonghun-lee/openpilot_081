@@ -99,6 +99,7 @@ keys = {
   b"IgnoreZone": [TxType.PERSISTENT],
   b"PidKp": [TxType.PERSISTENT],
   b"PidKi": [TxType.PERSISTENT],
+  b"PidKd": [TxType.PERSISTENT],
   b"PidKf": [TxType.PERSISTENT],
   b"CameraOffsetAdj": [TxType.PERSISTENT],
   b"SteerRatioAdj": [TxType.PERSISTENT],
