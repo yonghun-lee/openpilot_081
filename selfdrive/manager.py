@@ -448,7 +448,11 @@ def manager_thread():
 
   params = Params()
 
-  EnableLogger = int(params.get('OpkrEnableLogger'))     
+  EnableLogger = int(params.get('OpkrEnableLogger'))
+  EnableMap = int(params.get('OpkrEnableMap'))
+
+  if not EnableMap:
+    car_started_processes.remove( 'mapd' )
 
   if not EnableLogger:
     car_started_processes.remove( 'loggerd' )
