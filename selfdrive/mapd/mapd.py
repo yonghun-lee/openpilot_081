@@ -27,7 +27,6 @@ from selfdrive.mapd.mapd_helpers import MAPS_LOOKAHEAD_DISTANCE, Way, circle_thr
 # define LoggerThread class to implement logging functionality
 class LoggerThread(threading.Thread):
     def __init__(self, threadID, name):
-        config_realtime_process(4, Priority.CTRL_LOWER)
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
@@ -52,7 +51,6 @@ class LoggerThread(threading.Thread):
 
 class QueryThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}): # sharedParams is dict of params shared between two threads
-        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor https://stackoverflow.com/questions/2399307/how-to-invoke-the-super-constructor-in-python
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
@@ -239,7 +237,6 @@ class QueryThread(LoggerThread):
 
 class MapsdThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}):
-        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
@@ -412,7 +409,6 @@ class MapsdThread(LoggerThread):
 
 class MessagedGPSThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}):
-        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
@@ -444,6 +440,7 @@ class MessagedGPSThread(LoggerThread):
             self.logger.debug("setting last_gps to %s" % str(gps))
 
 def main():
+    config_realtime_process(4, Priority.CTRL_LOWER)
     params = Params()
     dongle_id = params.get("DongleId")
     crash.bind_user(id=dongle_id)
