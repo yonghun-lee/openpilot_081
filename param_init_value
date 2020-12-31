@@ -21,10 +21,10 @@ ActuatorEffectiveness:15
 Scale:1750
 LqrKi:10
 DcGain:30
-IgnoreZone:0
+IgnoreZone:1
 PidKp:20
 PidKi:40
-PidKd:50
+PidKd:150
 PidKf:5
 CameraOffsetAdj:60
 SteerRatioAdj:140
