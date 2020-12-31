@@ -440,7 +440,6 @@ class MessagedGPSThread(LoggerThread):
             self.logger.debug("setting last_gps to %s" % str(gps))
 
 def main():
-    config_realtime_process(4, Priority.CTRL_LOWER)
     params = Params()
     dongle_id = params.get("DongleId")
     crash.bind_user(id=dongle_id)
