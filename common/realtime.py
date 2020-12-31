@@ -25,6 +25,7 @@ class Priority:
   # - modeld = 55
   # - camerad = 54
   CTRL_LOW = 51 # plannerd & radard
+  CTRL_LOWER = 50 # mapd
 
   # CORE 3
   # - boardd = 55

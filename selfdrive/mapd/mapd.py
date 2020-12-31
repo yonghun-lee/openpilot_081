@@ -13,6 +13,7 @@ import logging.handlers
 from scipy import spatial
 import selfdrive.crash as crash
 from common.params import Params
+from common.realtime import Priority, config_realtime_process
 from collections import defaultdict
 import cereal.messaging as messaging
 from selfdrive.version import version, dirty
@@ -26,6 +27,7 @@ from selfdrive.mapd.mapd_helpers import MAPS_LOOKAHEAD_DISTANCE, Way, circle_thr
 # define LoggerThread class to implement logging functionality
 class LoggerThread(threading.Thread):
     def __init__(self, threadID, name):
+        config_realtime_process(4, Priority.CTRL_LOWER)
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
@@ -50,6 +52,7 @@ class LoggerThread(threading.Thread):
 
 class QueryThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}): # sharedParams is dict of params shared between two threads
+        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor https://stackoverflow.com/questions/2399307/how-to-invoke-the-super-constructor-in-python
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
@@ -236,6 +239,7 @@ class QueryThread(LoggerThread):
 
 class MapsdThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}):
+        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
@@ -408,6 +412,7 @@ class MapsdThread(LoggerThread):
 
 class MessagedGPSThread(LoggerThread):
     def __init__(self, threadID, name, sharedParams={}):
+        config_realtime_process(4, Priority.CTRL_LOWER)
         # invoke parent constructor
         LoggerThread.__init__(self, threadID, name)
         self.sharedParams = sharedParams
