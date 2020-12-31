@@ -123,7 +123,7 @@ class QueryThread(LoggerThread):
             if time.time() - start > 2.0:
                 print("Mapd QueryThread lagging by: %s" % str(time.time() - start - 1.0))
             if time.time() - start < 1.0:
-                time.sleep(0.1)
+                time.sleep(0.5)
                 continue
             else:
                 start = time.time()
@@ -259,7 +259,7 @@ class MapsdThread(LoggerThread):
             if time.time() - start > 0.2:
                 print("Mapd MapsdThread lagging by: %s" % str(time.time() - start - 0.1))
             if time.time() - start < 0.1:
-                time.sleep(0.01)
+                time.sleep(0.05)
                 continue
             else:
                 start = time.time()
@@ -422,7 +422,7 @@ class MessagedGPSThread(LoggerThread):
             if time.time() - start > 0.2:
                 print("Mapd MessagedGPSThread lagging by: %s" % str(time.time() - start - 0.1))
             if time.time() - start < 0.1:
-                time.sleep(0.01)
+                time.sleep(0.05)
                 continue
             else:
                 start = time.time()
