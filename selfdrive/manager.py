@@ -632,6 +632,7 @@ def main():
     ("FingerprintTwoSet", "1"),
     ("OpkrVariableCruiseProfile", "0"),
     ("OpkrLiveTune", "0"),
+    ("OpkrEnableMap", "0"),
   ]
 
   # set unset params
