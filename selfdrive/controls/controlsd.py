@@ -301,6 +301,9 @@ class Controls:
     elif self.CP.enableCruise and CS.cruiseState.enabled:
       if CS.cruiseButtons == Buttons.RES_ACCEL and int(Params().get('OpkrVariableCruise')) == 1 and CS.cruiseState.modeSel != 0 and CS.vSetDis < self.v_cruise_kph_last:
         self.v_cruise_kph = self.v_cruise_kph_last
+      elif CS.cruiseButtons == Buttons.RES_ACCEL and int(Params().get('OpkrVariableCruise')) == 1 and CS.cruiseState.modeSel != 0 and self.v_cruise_kph_last <= round(CS.vEgo*CV.MS_TO_KPH):
+        self.v_cruise_kph = round(CS.vEgo*CV.MS_TO_KPH)
+        self.v_cruise_kph_last = self.v_cruise_kph
       elif CS.cruiseButtons == Buttons.RES_ACCEL or CS.cruiseButtons == Buttons.SET_DECEL:
         self.v_cruise_kph = round(CS.cruiseState.speed * CV.MS_TO_KPH)
         self.v_cruise_kph_last = self.v_cruise_kph
@@ -534,6 +537,7 @@ class Controls:
     controlsState.applyAccel = CC.applyAccel
     controlsState.alertTextMsg1 = self.log_alertTextMsg1
     controlsState.alertTextMsg2 = self.log_alertTextMsg2
+    controlsState.limitSpeedCamera = self.sm['plan'].targetSpeedCamera
     controlsState.lateralControlMethod = self.lateral_control_method
 
     if self.CP.lateralTuning.which() == 'pid':
