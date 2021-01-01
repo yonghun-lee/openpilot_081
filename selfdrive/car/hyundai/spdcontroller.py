@@ -157,7 +157,7 @@ class SpdController():
         if CS.acc_active:
             delta_vsetdis = abs(int(CS.VSetDis) - self.prev_VSetDis)
             if self.prev_clu_CruiseSwState != CS.cruise_buttons:
-                if CS.cruise_buttons = Buttons.RES_ACCEL or CS.cruise_buttons = Buttons.SET_DECEL:
+                if CS.cruise_buttons == Buttons.RES_ACCEL or CS.cruise_buttons == Buttons.SET_DECEL:
                     self.prev_VSetDis = int(CS.VSetDis)
                 elif CS.driverOverride:
                     set_speed_kph = int(CS.VSetDis)
@@ -179,7 +179,7 @@ class SpdController():
                         set_speed_kph -= 1
 
                 self.prev_clu_CruiseSwState = CS.cruise_buttons
-            elif (CS.cruise_buttons = Buttons.RES_ACCEL or CS.cruise_buttons = Buttons.SET_DECEL) and delta_vsetdis > 0:
+            elif (CS.cruise_buttons == Buttons.RES_ACCEL or CS.cruise_buttons == Buttons.SET_DECEL) and delta_vsetdis > 0:
                 self.curise_sw_check = True
                 set_speed_kph = int(CS.VSetDis)
         else:
