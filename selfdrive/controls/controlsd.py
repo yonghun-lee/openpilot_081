@@ -294,8 +294,6 @@ class Controls:
   def state_transition(self, CS):
     """Compute conditional state transitions and execute actions on state transitions"""
 
-    self.v_cruise_kph_last = self.v_cruise_kph
-
     # if stock cruise is completely disabled, then we can use our own set speed logic
     self.CP.enableCruise = self.CI.CP.enableCruise
     print('Cruise_button={}  CS_button={} v_cruise_kph={} v_cruise_kph_last={} VsetDis={}'.format(CS.cruiseButtons, CS.buttonEvents, self.v_cruise_kph, self.v_cruise_kph_last, CS.vSetDis))
@@ -304,11 +302,9 @@ class Controls:
     elif self.CP.enableCruise and CS.cruiseState.enabled:
       if CS.cruiseButtons == Buttons.RES_ACCEL and int(Params().get('OpkrVariableCruise')) == 1 and CS.cruiseState.modeSel != 0 and CS.vSetDis < self.v_cruise_kph_last:
         self.v_cruise_kph = self.v_cruise_kph_last
-      elif CS.cruiseButtons == Buttons.RES_ACCEL:
-        self.v_cruise_kph = 50
       else:
-        self.v_cruise_kph = 60
-        #self.v_cruise_kph = round(CS.cruiseState.speed * CV.MS_TO_KPH)
+        self.v_cruise_kph = round(CS.cruiseState.speed * CV.MS_TO_KPH)
+        self.v_cruise_kph_last = self.v_cruise_kph
 
     # decrease the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
