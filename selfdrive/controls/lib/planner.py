@@ -255,7 +255,7 @@ class Planner():
             v_speedlimit_ahead = 0
         elif not sm['liveMapData'].speedLimitAhead:
           self.speed_ahead_distance_prev = 1000
-
+      print('ahead_dist={}'.format(sm['liveMapData'].speedLimitAheadDistance))
       #v_cruise_setpoint = min([v_cruise_setpoint, v_curvature_map, v_speedlimit, v_speedlimit_ahead])
       v_cruise_setpoint = min([v_cruise_setpoint, v_curvature_map, v_speedlimit])
 
