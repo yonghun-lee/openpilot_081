@@ -96,8 +96,8 @@ class Spdctrl(SpdController):
         else:
             d_delta2 = 0
  
-        if CS.driverAcc_time: #운전자가 가속페달 밟으면 크루즈 설정속도를 현재속도+3으로 동기화
-            lead_set_speed = int(round(CS.clu_Vanz)) + 3
+        if CS.driverAcc_time: #운전자가 가속페달 밟으면 크루즈 설정속도를 현재속도로 동기화
+            lead_set_speed = int(round(CS.clu_Vanz))
             self.seq_step_debug = "운전자가속"
             lead_wait_cmd = 15
         elif int(round(self.target_speed)) < int(CS.VSetDis) and (self.osm_enable or self.osm_enable_camera) and ((int(round(self.target_speed)) < int(round(self.cruise_set_speed_kph))) and self.target_speed != 0):
