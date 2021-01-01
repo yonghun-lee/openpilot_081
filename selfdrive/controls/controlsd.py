@@ -20,12 +20,10 @@ from selfdrive.controls.lib.alertmanager import AlertManager
 from selfdrive.controls.lib.vehicle_model import VehicleModel
 from selfdrive.controls.lib.planner import LON_MPC_STEP
 from selfdrive.locationd.calibrationd import Calibration
+from selfdrive.car.hyundai.values import Buttons
 from common.hardware import HARDWARE
 
 import common.log as trace1
-
-ButtonType = car.CarState.ButtonEvent.Type
-ButtonPrev = ButtonType.unknown
 
 LDW_MIN_SPEED = 50 * CV.KPH_TO_MS
 LANE_DEPARTURE_THRESHOLD = 0.1
@@ -300,14 +298,17 @@ class Controls:
 
     # if stock cruise is completely disabled, then we can use our own set speed logic
     self.CP.enableCruise = self.CI.CP.enableCruise
-    print('enableCruise={} cruisestate_enabled={} CS_button={} v_cruise_kph={} v_cruise_kph_last={} VsetDis={}'.format(self.CP.enableCruise, CS.cruiseState.enabled, CS.buttonEvents, self.v_cruise_kph, self.v_cruise_kph_last, CS.vSetDis))
+    print('Cruise_button={}  CS_button={} v_cruise_kph={} v_cruise_kph_last={} VsetDis={}'.format(CS.cruiseButtons, CS.buttonEvents, self.v_cruise_kph, self.v_cruise_kph_last, CS.vSetDis))
     if not self.CP.enableCruise:
       self.v_cruise_kph = update_v_cruise(self.v_cruise_kph, CS.buttonEvents, self.enabled, self.is_metric)
     elif self.CP.enableCruise and CS.cruiseState.enabled:
-      if CS.buttonEvents == ButtonType.accelCruise and int(Params().get('OpkrVariableCruise')) == 1 and CS.cruiseState.modeSel != 0 and CS.vSetDis < self.v_cruise_kph_last:
+      if CS.cruiseButtons == Buttons.RES_ACCEL and int(Params().get('OpkrVariableCruise')) == 1 and CS.cruiseState.modeSel != 0 and CS.vSetDis < self.v_cruise_kph_last:
         self.v_cruise_kph = self.v_cruise_kph_last
+      elif CS.cruiseButtons == Buttons.RES_ACCEL:
+        self.v_cruise_kph = 50
       else:
-        self.v_cruise_kph = CS.cruiseState.speed * CV.MS_TO_KPH
+        self.v_cruise_kph = 60
+        #self.v_cruise_kph = round(CS.cruiseState.speed * CV.MS_TO_KPH)
 
     # decrease the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
