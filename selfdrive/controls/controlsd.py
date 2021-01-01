@@ -304,7 +304,8 @@ class Controls:
         self.v_cruise_kph = self.v_cruise_kph_last
       else:
         self.v_cruise_kph = round(CS.cruiseState.speed * CV.MS_TO_KPH)
-        self.v_cruise_kph_last = self.v_cruise_kph
+        if self.v_cruise_kph_last < self.v_cruise_kph:
+          self.v_cruise_kph_last = self.v_cruise_kph
 
     # decrease the soft disable timer at every step, as it's reset on
     # entrance in SOFT_DISABLING state
