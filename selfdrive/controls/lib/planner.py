@@ -230,7 +230,7 @@ class Planner():
 
       if (v_ego*3.6) <= 50:
         if sm['liveMapData'].speedLimitAhead > 29 and 0 < sm['liveMapData'].speedLimitAheadDistance < (v_ego*3.6*2.5):
-          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance:
+          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance - 5:
             self.speed_ahead_distance_prev = sm['liveMapData'].speedLimitAheadDistance
             self.v_speedlimit_ahead = sm['liveMapData'].speedLimitAhead
           else:
@@ -239,7 +239,7 @@ class Planner():
           self.speed_ahead_distance_prev = 1000
       elif (v_ego*3.6) <= 70:
         if sm['liveMapData'].speedLimitAhead > 29 and 0 < sm['liveMapData'].speedLimitAheadDistance < (v_ego*3.6*3.5):
-          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance:
+          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance - 5:
             self.speed_ahead_distance_prev = sm['liveMapData'].speedLimitAheadDistance
             self.v_speedlimit_ahead = sm['liveMapData'].speedLimitAhead
           else:
@@ -248,7 +248,7 @@ class Planner():
           self.speed_ahead_distance_prev = 1000
       elif (v_ego*3.6) > 70:
         if sm['liveMapData'].speedLimitAhead > 29 and 0 < sm['liveMapData'].speedLimitAheadDistance < (v_ego*3.6*4.5):
-          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance:
+          if self.speed_ahead_distance_prev >= sm['liveMapData'].speedLimitAheadDistance - 5:
             self.speed_ahead_distance_prev = sm['liveMapData'].speedLimitAheadDistance
             self.v_speedlimit_ahead = sm['liveMapData'].speedLimitAhead
           else:
