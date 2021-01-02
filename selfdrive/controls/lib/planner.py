@@ -256,7 +256,7 @@ class Planner():
         elif not sm['liveMapData'].speedLimitAhead:
           self.speed_ahead_distance_prev = 1000
 
-      printf('vspd_ahead={} spd_ahed_dis_prev={}'.format(self.v_speedlimit_ahead, self.speed_ahead_distance_prev))
+      print('vspd_ahead={} spd_ahed_dis_prev={}'.format(self.v_speedlimit_ahead, self.speed_ahead_distance_prev))
       #v_cruise_setpoint = min([v_cruise_setpoint, v_curvature_map, v_speedlimit, v_speedlimit_ahead])
       v_cruise_setpoint = min([v_cruise_setpoint, v_curvature_map, v_speedlimit])
 
