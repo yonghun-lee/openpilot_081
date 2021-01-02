@@ -46,6 +46,9 @@ static void set_awake(UIState *s, bool awake) {
   if (awake) {
     // 30 second timeout
     s->awake_timeout = (s->nOpkrAutoScreenOff && s->started)? s->nOpkrAutoScreenOff*60*UI_FREQ : 30*UI_FREQ;
+    if (system("ps -ef | grep com.mixplorer | grep u0 | awk {'print $3'}") != "0:00") {
+      s->awake_timeout = 180*UI_FREQ;
+    }
   }
   if (s->awake != awake) {
     s->awake = awake;
@@ -60,6 +63,9 @@ static void set_awake(UIState *s, bool awake) {
       ui_set_brightness(s, 0);
       //framebuffer_set_power(s->fb, HWC_POWER_MODE_OFF);
       enable_event_processing(false);
+      if (system("ps -ef | grep com.mixplorer | grep u0 | awk {'print $3'}") != "0:00") {
+        system("pkill com.mixplorer");
+      }
     }
   }
 }
